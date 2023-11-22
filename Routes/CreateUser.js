@@ -29,7 +29,7 @@ router.post("/CreateUser",
                 name: req.body.name,
                 password: secPassword,
                 email: req.body.email,
-                location: req.body.location
+                location: req.body.geolocation
             })
             res.json({ success: true });
         } catch (error) {
