@@ -20,8 +20,8 @@ router.post("/CreateUser",
         let secPassword = await bcrypt.hash(req.body.password, salt);
 
         // checking if already existing user or not
-        const check = await User.findOne({ email: req.body.email });
-        if (!check) {
+        const ifExisting = await User.findOne({ email: req.body.email });
+        if (!ifExisting) {
             try {
                 await User.create({
                     name: req.body.name,
@@ -36,8 +36,7 @@ router.post("/CreateUser",
             }
         }
         else {
-            console.log("Already existing user");
-            return res.status(201).json({ errors: "Existing user" });
+            return res.status(409).json({ errors: "Already Existing User" });
         }
     })
 
