@@ -36,7 +36,7 @@ router.post("/CreateUser",
             }
         }
         else {
-            return res.status(409).json({ errors: "Already Existing User" });
+            return res.status(201).json({ errors: "Already Existing User" });
         }
     })
 
