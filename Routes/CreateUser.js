@@ -18,17 +18,26 @@ router.post("/CreateUser",
         }
         const salt = await bcrypt.genSalt(10);
         let secPassword = await bcrypt.hash(req.body.password, salt);
-        try {
-            await User.create({
-                name: req.body.name,
-                password: secPassword,
-                email: req.body.email,
-                location: req.body.location
-            })
-            res.json({ success: true });
-        } catch (error) {
-            console.log(error);
-            res.json({ success: false });
+
+        // checking if already existing user or not
+        const check = await User.findOne({ email: req.body.email });
+        if (!check) {
+            try {
+                await User.create({
+                    name: req.body.name,
+                    password: secPassword,
+                    email: req.body.email,
+                    location: req.body.location
+                })
+                res.json({ success: true });
+            } catch (error) {
+                console.log(error);
+                res.json({ success: false });
+            }
+        }
+        else {
+            console.log("Already existing user");
+            return res.status(201).json({ errors: "Existing user" });
         }
     })
 

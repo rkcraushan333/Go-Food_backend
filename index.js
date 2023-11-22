@@ -16,7 +16,7 @@ app.use('/api', require("./Routes/DisplayData"))
 app.use('/api', require("./Routes/OrderData"))
 
 app.get('/', (req, res) => {
-    res.send('Ha bhai 5000 chal rha hai')
+    res.send('Server is Running')
 })
 app.listen(5000, () => {
     console.log(`Server is running on port 5000`)
