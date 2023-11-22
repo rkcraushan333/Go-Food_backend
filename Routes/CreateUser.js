@@ -47,6 +47,7 @@ router.post("/LoginUser",
             return res.status(400).json({ errors: errors.array() });
         }
         let email = req.body.email;
+        console.log(req.body);
         try {
             let userData = await User.findOne({ email });
             if (!userData) {
